@@ -32,7 +32,7 @@ const dbUrl = process.env.DB_URL;
 // 'mongodb://127.0.0.1:27017/yelp-camp'
 
 
-mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp',{
+mongoose.connect(dbUrl,{
     // useNewUrlParser: true,
     // // useCreateIndex:true,
     // useUnifiedTopology:true
@@ -68,8 +68,6 @@ app.use(express.static(path.join(__dirname,'public')));
 
 //..........................................................................................................................
 
-
-//----------------------session Configuration----------------------------------------
 const store = new MongoStore({
     url: dbUrl,
     secret:'thisismysecret',
@@ -94,8 +92,6 @@ const sessionConfig = {
 }
 app.use(session(sessionConfig));
 app.use(flash());
-
-//-----------------------------------------------------------------------------------
 
 app.use(passport.initialize());
 app.use(passport.session());
